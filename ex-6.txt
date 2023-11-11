@@ -1,0 +1,33 @@
+mysql> select *from employee;
++------+----------+------+----------------+--------+
+| e_id | emp_name | age  | address        | salary |
++------+----------+------+----------------+--------+
+|    1 | sammer   |   24 | chilakaluripet |  28888 |
+|    2 | ramesh   |   28 | edlapadu       |  78955 |
+|    3 | sasi     |   37 | timmapuram     |  38888 |
+|    4 | jaswanth |   45 | pedanandipadu  | 100000 |
+|    5 | ram      |   34 | avadi          |  43636 |
++------+----------+------+----------------+--------+
+5 rows in set (0.00 sec)
+mysql> select address, sum(salary) as salary from employee group by address;
++----------------+--------+
+| address        | salary |
++----------------+--------+
+| chilakaluripet |  28888 |
+| edlapadu       |  78955 |
+| timmapuram     |  38888 |
+| pedanandipadu  | 100000 |
+| avadi          |  43636 |
++----------------+--------+
+5 rows in set (0.00 sec)
+mysql> select emp_name,age from employee order by salary;
++----------+------+
+| emp_name | age  |
++----------+------+
+| sammer   |   24 |
+| sasi     |   37 |
+| ram      |   34 |
+| ramesh   |   28 |
+| jaswanth |   45 |
++----------+------+
+5 rows in set (0.00 sec)

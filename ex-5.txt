@@ -1,0 +1,49 @@
+mysql> select *from employee;
++------+----------+------+----------------+--------+
+| e_id | emp_name | age  | address        | salary |
++------+----------+------+----------------+--------+
+|    1 | sammer   |   24 | chilakaluripet |  28888 |
+|    2 | ramesh   |   28 | edlapadu       |  78955 |
+|    3 | sasi     |   37 | timmapuram     |  38888 |
+|    4 | jaswanth |   45 | pedanandipadu  | 100000 |
+|    5 | ram      |   34 | avadi          |  43636 |
++------+----------+------+----------------+--------+
+5 rows in set (0.00 sec)
+mysql> select emp_name,address from employee where age between 20 and 40;
++----------+----------------+
+| emp_name | address        |
++----------+----------------+
+| sammer   | chilakaluripet |
+| ramesh   | edlapadu       |
+| sasi     | timmapuram     |
+| ram      | avadi          |
++----------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select stu_name from employee where (37|age) in (24,28,37,45,34);
+ERROR 1054 (42S22): Unknown column 'stu_name' in 'field list'
+mysql> select emp_name from employee where (37|age) in (24,28,37,45,34);
++----------+
+| emp_name |
++----------+
+| sasi     |
+| jaswanth |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select from employee max(age),min(age),avg(age);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from employee max(age),min(age),avg(age)' at line 1
+mysql> select max(age),min(age),avg(age) from employee;
++----------+----------+----------+
+| max(age) | min(age) | avg(age) |
++----------+----------+----------+
+|       45 |       24 |  33.6000 |
++----------+----------+----------+
+1 row in set (0.00 sec)	
+mysql> select sum(age) from student;;
++----------+
+| sum(age) |
++----------+
+|      153 |
++----------+
+1 row in set (0.00 sec)

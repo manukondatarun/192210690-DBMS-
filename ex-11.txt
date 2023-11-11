@@ -1,0 +1,45 @@
+mysql> DELIMITER $$
+mysql> CREATE FUNCTION REPEAT_DEMO(INC INT)
+    ->     RETURNS CHAR(40)
+    ->     DETERMINISTIC
+    ->     BEGIN
+    ->     DECLARE INCOME INT;
+    ->     SET INCOME=1000;
+    ->     REPEAT
+    ->     SET INCOME=INCOME+INC;
+    ->     UNTIL INCOME>4000
+    ->     END REPEAT;
+    ->     RETURN INCOME;
+    ->     END;
+    ->     $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT REPEAT_D(4900);$$
++----------------+
+| REPEAT_D(4900) |
++----------------+
+| 5900           |
++----------------+
+1 row in set (0.00 sec)
+mysql> DELIMITER //
+mysql>  CREATE PROCEDURE while_loop()
+    ->      BEGIN
+    ->      DECLARE num INT default 1;
+    ->    DECLARE res Varchar(50) default '';
+    ->     WHILE num < 78125 DO
+    ->     SET res = CONCAT(res,num,',');
+    ->     SET num = num*5;
+    ->      END While;
+    ->     SELECT res;
+    ->     END //
+Query OK, 0 rows affected (0.01 sec)
+mysql> call while_loop();
+    -> //
++----------------------------+
+| res                        |
++----------------------------+
+| 1,5,25,125,625,3125,15625, |
++----------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)

@@ -1,0 +1,81 @@
+mysql> show grants for sammer;
++-------------------------------------------------------------+
+| Grants for sammer@%                                         |
++-------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `sammer`@`%`                          |
+| GRANT ALL PRIVILEGES ON `student`.`student` TO `sammer`@`%` |
++-------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all on student from sammer;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> grant insert,select on student to sammer;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show grants for sammer;
++-------------------------------------------------------------+
+| Grants for sammer@%                                         |
++-------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `sammer`@`%`                          |
+| GRANT SELECT, INSERT ON `student`.`student` TO `sammer`@`%` |
++-------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> grant update,select to employee to sammer;
+ERROR 1064 (42000): Illegal authorization identifier near 'update,select to employee to sammer' at line 1
+mysql> revoke all on student from sammer;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for sammer;
++------------------------------------+
+| Grants for sammer@%                |
++------------------------------------+
+| GRANT USAGE ON *.* TO `sammer`@`%` |
++------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> grant update,select to employee to sammer;
+ERROR 1064 (42000): Illegal authorization identifier near 'update,select to employee to sammer' at line 1
+mysql> grant select,update on student to sammer;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant update,select on employee to sammer;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for sammer;
++--------------------------------------------------------------+
+| Grants for sammer@%                                          |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `sammer`@`%`                           |
+| GRANT SELECT, UPDATE ON `student`.`employee` TO `sammer`@`%` |
+| GRANT SELECT, UPDATE ON `student`.`student` TO `sammer`@`%`  |
++--------------------------------------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> revoke update on student from sammer;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for sammer;
++--------------------------------------------------------------+
+| Grants for sammer@%                                          |
++--------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `sammer`@`%`                           |
+| GRANT SELECT, UPDATE ON `student`.`employee` TO `sammer`@`%` |
+| GRANT SELECT ON `student`.`student` TO `sammer`@`%`          |
++--------------------------------------------------------------+
+3 rows in set (0.00 sec)
+
+mysql> revoke on employee from sammer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on employee from sammer' at line 1
+mysql> revoke all on employee from sammer;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show grants for sammer;
++-----------------------------------------------------+
+| Grants for sammer@%                                 |
++-----------------------------------------------------+
+| GRANT USAGE ON *.* TO `sammer`@`%`                  |
+| GRANT SELECT ON `student`.`student` TO `sammer`@`%` |
++-----------------------------------------------------+
+2 rows in set (0.00 sec)

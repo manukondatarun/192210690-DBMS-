@@ -1,0 +1,26 @@
+mysql> create view view2 as select from student where address='avadi';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from student where address='avadi'' at line 1
+mysql> create view view2 as select *from student where address='avadi';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select *from view2;
++------+----------+------+---------+-----------+
+| s_id | stu_name | age  | address | mobile_no |
++------+----------+------+---------+-----------+
+|    5 | ram      |   34 | avadi   |   4325636 |
++------+----------+------+---------+-----------+
+1 row in set (0.00 sec)
+mysql> create unique index fac_index on faculty(f_id,fac_name);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show index from faculty;
++---------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table   | Non_unique | Key_name  | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++---------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| faculty |          0 | fac_index |            1 | f_id        | A         |           5 |     NULL |   NULL | YES  | BTREE      |         |
+| YES     | NULL       |
+| faculty |          0 | fac_index |            2 | fac_name    | A         |           5 |     NULL |   NULL | YES  | BTREE      |         |
+| YES     | NULL       |
++---------+------------+-----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+2 rows in set (0.01 sec)

@@ -1,0 +1,118 @@
+mysql>  Delimiter //
+mysql> CREATE PROCEDURE demo()
+    ->    BEGIN
+    ->       DECLARE num INT;
+    ->       DECLARE str VARCHAR(50);
+    ->       SET num = 1;
+    ->       SET str = '';
+    ->       label: LOOP
+    ->       SET num = num + 1;
+    ->       IF num > 16 THEN
+    ->          LEAVE label;
+    ->       END IF;
+    ->       IF (num mod 2) THEN
+    ->          ITERATE label;
+    ->       ELSE
+    ->          SET str = CONCAT(str, num, ',');
+    ->       END IF;
+    ->    END LOOP;
+    ->    SELECT str;
+    ->    END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call demo;
+    -> //
++----------------------+
+| str                  |
++----------------------+
+| 2,4,6,8,10,12,14,16, |
++----------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+mysql> SELECT stu_name, Marks,CASE WHEN Marks > 90 THEN 'Excellent' WHEN Marks >85 THEN 'Good' ELSE 'average' END AS performance FROM student;
+    -> //
++----------+-------+-------------+
+| stu_name | Marks | performance |
++----------+-------+-------------+
+| sammer   |    78 | average     |
+| sasi     |    94 | Excellent   |
+| jaswanth |    85 | average     |
+| ram      |    95 | Excellent   |
+| ramesh   |    89 | Good        |
+| komma    |    93 | Excellent   |
++----------+-------+-------------+
+6 rows in set (0.00 sec)
+mysql> select fac_name,age,if(age>=40,"experienced","less experience") from faculty;
+    -> //
++----------+------+---------------------------------------------+
+| fac_name | age  | if(age>=40,"experienced","less experience") |
++----------+------+---------------------------------------------+
+| bala     |   24 | less experience                             |
+| ashwanth |   34 | less experience                             |
+| sam      |   56 | experienced                                 |
+| ram      |   47 | experienced                                 |
+| jaw      |   45 | experienced                                 |
++----------+------+---------------------------------------------+
+5 rows in set (0.01 sec)
+mysql> DELIMITER $$
+mysql> CREATE PROCEDURE GeekLoop()
+    ->  BEGIN
+    -> DECLARE no INT;
+    ->   SET no = 0;
+    ->   lable: LOOP
+    ->     SET no = no +1;
+    ->     select no ;
+    ->     IF no =5 THEN
+    ->      LEAVE lable;
+    ->     END IF;
+    ->  END LOOP ;
+    -> SELECT no;
+    -> END ;$$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> call Geekloop;
+    -> $$
++------+
+| no   |
++------+
+|    1 |
++------+
+1 row in set (0.00 sec)
+
++------+
+| no   |
++------+
+|    2 |
++------+
+1 row in set (0.00 sec)
+
++------+
+| no   |
++------+
+|    3 |
++------+
+1 row in set (0.00 sec)
+
++------+
+| no   |
++------+
+|    4 |
++------+
+1 row in set (0.01 sec)
+
++------+
+| no   |
++------+
+|    5 |
++------+
+1 row in set (0.01 sec)
+
++------+
+| no   |
++------+
+|    5 |
++------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)

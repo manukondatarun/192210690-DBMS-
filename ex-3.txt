@@ -1,0 +1,48 @@
+mysql> create table student(s_id int,stu_name varchar(20),age int,address varchar(20),mobile_no int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into student values(1,'sammer',24,'chilakaluripet',2888856),(2,'ramesh',28,'edlapadu',7468955),(3,'sasi',37,'timmapuram',3884388),(4,'jaswanth',45,'pedanandipadu',12400000),(5,'ram',34,'avadi',4325636);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++------+----------+------+----------------+-----------+
+| s_id | stu_name | age  | address        | mobile_no |
++------+----------+------+----------------+-----------+
+|    1 | sammer   |   24 | chilakaluripet |   2888856 |
+|    2 | ramesh   |   28 | edlapadu       |   7468955 |
+|    3 | sasi     |   37 | timmapuram     |   3884388 |
+|    4 | jaswanth |   45 | pedanandipadu  |  12400000 |
+|    5 | ram      |   34 | avadi          |   4325636 |
++------+----------+------+----------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> update student set age = 32 where s_id = 4;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from student;
++------+----------+------+----------------+-----------+
+| s_id | stu_name | age  | address        | mobile_no |
++------+----------+------+----------------+-----------+
+|    1 | sammer   |   24 | chilakaluripet |   2888856 |
+|    2 | ramesh   |   28 | edlapadu       |   7468955 |
+|    3 | sasi     |   37 | timmapuram     |   3884388 |
+|    4 | jaswanth |   32 | pedanandipadu  |  12400000 |
+|    5 | ram      |   34 | avadi          |   4325636 |
++------+----------+------+----------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> delete from student where s_id = 2;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from student;
++------+----------+------+----------------+-----------+
+| s_id | stu_name | age  | address        | mobile_no |
++------+----------+------+----------------+-----------+
+|    1 | sammer   |   24 | chilakaluripet |   2888856 |
+|    3 | sasi     |   37 | timmapuram     |   3884388 |
+|    4 | jaswanth |   32 | pedanandipadu  |  12400000 |
+|    5 | ram      |   34 | avadi          |   4325636 |
++------+----------+------+----------------+-----------+
+4 rows in set (0.00 sec)
