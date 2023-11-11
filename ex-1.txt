@@ -1,0 +1,54 @@
+mysql> create table workers(w_id int,w_name varchar(20),w_age int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc workers;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| w_id   | int         | YES  |     | NULL    |       |
+| w_name | varchar(20) | YES  |     | NULL    |       |
+| w_age  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> alter table workers add w_salary int,w_address;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'w_address' at line 1
+mysql> alter table workers add w_salary int,w_address varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'w_address varchar(20)' at line 1
+mysql> alter table workers add w_salary int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc workers;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| w_id     | int         | YES  |     | NULL    |       |
+| w_name   | varchar(20) | YES  |     | NULL    |       |
+| w_age    | int         | YES  |     | NULL    |       |
+| w_salary | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into workers values(1,'groot',34,40000),(2,'steve',29,29000),(3,'tony',38,78889);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select *from workers;
++------+--------+-------+----------+
+| w_id | w_name | w_age | w_salary |
++------+--------+-------+----------+
+|    1 | groot  |    34 |    40000 |
+|    2 | steve  |    29 |    29000 |
+|    3 | tony   |    38 |    78889 |
++------+--------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> truncate table workers;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select *from workers;
+Empty set (0.00 sec)
+
+mysql> drop table workers;
+Query OK, 0 rows affected (0.01 sec)

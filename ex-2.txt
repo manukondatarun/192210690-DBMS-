@@ -1,0 +1,78 @@
+mysql> create table mentee(m_id int,m_name varchar(20),m_age int,dep_name varchar(20),primary key(m_id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc mentee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| m_id     | int         | NO   | PRI | NULL    |       |
+| m_name   | varchar(20) | YES  |     | NULL    |       |
+| m_age    | int         | YES  |     | NULL    |       |
+| dep_name | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+mysql> insert into mentee values(101,'sammer',18,'cse');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into mentee values(101,'kiran',19,'ece');
+ERROR 1062 (23000): Duplicate entry '101' for key 'mentee.PRIMARY'
+
+mysql> create table department(d_id int,d_name varchar(20),d_floor int,dep_faculty varchar(20),primary key(d_name));
+Query OK, 0 rows affected (0.02 sec)
+mysql> create table mentee(m_id int,m_name varchar(20),m_age int,d_name varchar(20),primary key(m_id),foreign key(d_name) references department(d_name));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc mentee;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| m_id   | int         | NO   | PRI | NULL    |       |
+| m_name | varchar(20) | YES  |     | NULL    |       |
+| m_age  | int         | YES  |     | NULL    |       |
+| d_name | varchar(20) | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop table mentee;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table mentee(m_id int,m_name varchar(20),m_age int,d_name varchar(20),check (m_age>18));
+Query OK, 0 rows affected (0.05 sec)
+mysql>  insert into mentee(m_id,m_name,m_age,d_name) values(101,'sammer',19,'cse');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from mentee;
++------+--------+-------+--------+
+| m_id | m_name | m_age | d_name |
++------+--------+-------+--------+
+|  101 | sammer |    19 | cse    |
++------+--------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql>  insert into mentee(m_id,m_name,m_age,d_name) values(102,'sunder',17,'ece');
+ERROR 3819 (HY000): Check constraint 'mentee_chk_1' is violated.
+mysql> drop table mentee;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table mentee(m_id int,m_name varchar(20),m_age int,d_name varchar(20),m_number int(20) unique);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> desc mentee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| m_id     | int         | YES  |     | NULL    |       |
+| m_name   | varchar(20) | YES  |     | NULL    |       |
+| m_age    | int         | YES  |     | NULL    |       |
+| d_name   | varchar(20) | YES  |     | NULL    |       |
+| m_number | int         | YES  | UNI | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>  insert into mentee values(101,'sammer',19,'cse',12345678);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into mentee values(102,'sunder',17,'ece',23456778);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into mentee values(103,'kiran',20,'ai&ds',12345678);
+ERROR 1062 (23000): Duplicate entry '12345678' for key 'mentee.m_number'
