@@ -1,0 +1,68 @@
+mysql> CREATE TABLE Student_Stored_Procedure(Student_ID INT NOT NULL,Student_Name varchar(100),Student_Course varchar(50),Student_Age INT,Student_Marks INT);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (101, 'Anuj', 'B.tech', 20, 88);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (102, 'Raman', 'MCA', 24, 98);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (104, 'Shyam', 'BBA', 19, 92);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (107, 'Vikash', 'B.tech', 20, 78);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (111, 'Monu', 'MBA', 21, 65);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (114, 'Jones', 'B.tech', 18, 93);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (121, 'Parul', 'BCA', 20, 97);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (123, 'Divya', 'B.tech', 21, 89);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Student_Stored_Procedure VALUES (128, 'Hemant', 'MBA', 23, 90);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Student_Stored_Procedure;
++------------+--------------+----------------+-------------+---------------+
+| Student_ID | Student_Name | Student_Course | Student_Age | Student_Marks |
++------------+--------------+----------------+-------------+---------------+
+|        101 | Anuj         | B.tech         |          20 |            88 |
+|        102 | Raman        | MCA            |          24 |            98 |
+|        104 | Shyam        | BBA            |          19 |            92 |
+|        107 | Vikash       | B.tech         |          20 |            78 |
+|        111 | Monu         | MBA            |          21 |            65 |
+|        114 | Jones        | B.tech         |          18 |            93 |
+|        121 | Parul        | BCA            |          20 |            97 |
+|        123 | Divya        | B.tech         |          21 |            89 |
+|        128 | Hemant       | MBA            |          23 |            90 |
++------------+--------------+----------------+-------------+---------------+
+9 rows in set (0.00 sec)
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE Show_Particular_Course(IN COURSE VARCHAR(20))
+    -> BEGIN
+    -> SELECT * FROM Student_Stored_Procedure WHERE COURSE = Student_Course;
+    -> END;
+    -> /
+    -> //
+Query OK, 0 rows affected (0.01 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/' at line 1
+mysql> CALL show_Particular_Course('B.tech');
+    -> //
++------------+--------------+----------------+-------------+---------------+
+| Student_ID | Student_Name | Student_Course | Student_Age | Student_Marks |
++------------+--------------+----------------+-------------+---------------+
+|        101 | Anuj         | B.tech         |          20 |            88 |
+|        107 | Vikash       | B.tech         |          20 |            78 |
+|        114 | Jones        | B.tech         |          18 |            93 |
+|        123 | Divya        | B.tech         |          21 |            89 |
++------------+--------------+----------------+-------------+---------------+
+4 rows in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
