@@ -1,0 +1,91 @@
+mysql> select *from faculty;
++------+----------+------+--------+----------------+
+| f_id | fac_name | age  | salary | address        |
++------+----------+------+--------+----------------+
+|    1 | bala     |   24 |  30000 | edlapadu       |
+|    2 | ashwanth |   34 | 200000 | guntur         |
+|    3 | sam      |   56 | 100000 | chilakaluripet |
+|    4 | ram      |   47 |  48890 | tenali         |
+|    5 | jaw      |   45 |  70000 | pedanandipadu  |
++------+----------+------+--------+----------------+
+5 rows in set (0.00 sec)
+mysql> select *from employee;
++------+----------+------+----------------+--------+
+| e_id | emp_name | age  | address        | salary |
++------+----------+------+----------------+--------+
+|    1 | sammer   |   24 | chilakaluripet |  28888 |
+|    2 | ramesh   |   28 | edlapadu       |  78955 |
+|    3 | sasi     |   37 | timmapuram     |  38888 |
+|    4 | jaswanth |   45 | pedanandipadu  | 100000 |
+|    5 | ram      |   34 | avadi          |  43636 |
++------+----------+------+----------------+--------+
+5 rows in set (0.00 sec)
+mysql> select a.fac_name,b.address from faculty a cross join employee b;
++----------+----------------+
+| fac_name | address        |
++----------+----------------+
+| jaw      | chilakaluripet |
+| ram      | chilakaluripet |
+| sam      | chilakaluripet |
+| ashwanth | chilakaluripet |
+| bala     | chilakaluripet |
+| jaw      | edlapadu       |
+| ram      | edlapadu       |
+| sam      | edlapadu       |
+| ashwanth | edlapadu       |
+| bala     | edlapadu       |
+| jaw      | timmapuram     |
+| ram      | timmapuram     |
+| sam      | timmapuram     |
+| ashwanth | timmapuram     |
+| bala     | timmapuram     |
+| jaw      | pedanandipadu  |
+| ram      | pedanandipadu  |
+| sam      | pedanandipadu  |
+| ashwanth | pedanandipadu  |
+| bala     | pedanandipadu  |
+| jaw      | avadi          |
+| ram      | avadi          |
+| sam      | avadi          |
+| ashwanth | avadi          |
+| bala     | avadi          |
++----------+----------------+
+25 rows in set (0.00 sec)
+mysql> select a.e_id,a.emp_name,b.address from employee a inner join faculty b where a.e_id=b.f_id;
++------+----------+----------------+
+| e_id | emp_name | address        |
++------+----------+----------------+
+|    1 | sammer   | edlapadu       |
+|    2 | ramesh   | guntur         |
+|    3 | sasi     | chilakaluripet |
+|    4 | jaswanth | tenali         |
+|    5 | ram      | pedanandipadu  |
++------+----------+----------------+
+5 rows in set (0.00 sec)
+mysql> select a.e_id,a.emp_name,b.address from employee a inner join faculty b where a.e_id=b.f_id;
++------+----------+----------------+
+| e_id | emp_name | address        |
++------+----------+----------------+
+|    1 | sammer   | edlapadu       |
+|    2 | ramesh   | guntur         |
+|    3 | sasi     | chilakaluripet |
+|    4 | jaswanth | tenali         |
+|    5 | ram      | pedanandipadu  |
+|    5 | komma    | pedanandipadu  |
++------+----------+----------------+
+6 rows in set (0.00 sec)
+mysql> select *from faculty a right join employee b on f_id=e_id;
++------+----------+------+--------+----------------+------+----------+------+----------------+--------+
+| f_id | fac_name | age  | salary | address        | e_id | emp_name | age  | address        | salary |
++------+----------+------+--------+----------------+------+----------+------+----------------+--------+
+|    1 | bala     |   24 |  30000 | edlapadu       |    1 | sammer   |   24 | chilakaluripet |  28888 |
+|    2 | ashwanth |   34 | 200000 | guntur         |    2 | ramesh   |   28 | edlapadu       |  78955 |
+|    3 | sam      |   56 | 100000 | chilakaluripet |    3 | sasi     |   37 | timmapuram     |  38888 |
+|    4 | ram      |   47 |  48890 | tenali         |    4 | jaswanth |   45 | pedanandipadu  | 100000 |
+|    5 | jaw      |   45 |  70000 | pedanandipadu  |    5 | ram      |   34 | avadi          |  43636 |
+|    5 | jaw      |   45 |  70000 | pedanandipadu  |    5 | komma    |   46 | karuchola      |  80000 |
+| NULL | NULL     | NULL |   NULL | NULL           |    6 | sunder   |   35 | nadendla       |  60987 |
+| NULL | NULL     | NULL |   NULL | NULL           |    7 | tanniru  |   26 | pondi          |  89000 |
+| NULL | NULL     | NULL |   NULL | NULL           |    8 | sun      |   39 | koturu         |  70987 |
++------+----------+------+--------+----------------+------+----------+------+----------------+--------+
+9 rows in set (0.00 sec)
